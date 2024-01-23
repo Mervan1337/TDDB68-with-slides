@@ -1,0 +1,6 @@
+The syscall, called is SYS_WRITE
+
+Its a fd1 which means it is a standard output
+
+In the adress 0xbffffed0 we used x/s *0xbffffed0. We got the string: "You got it, use your debugging skills during the labs!\n"
+You can also use: p *((char**)(f->esp+8))

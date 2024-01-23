@@ -1,0 +1,8 @@
+1) We will implement 2 new members in the thread-struct. 
+The first is a pointer-array containing children with pid:s as index.
+The second member is a pointer to the parent of the current process. 
+
+2) We will use a counter to keep track of who is the last process to exit. 
+The last will do the necessary work to close the OS. Also we will have a pointer to its parent and a reference to its children.
+
+3) We will use semaphore:s. (Can also use locks)

@@ -1,0 +1,40 @@
+1. If you do that you will slow down the system a lot hence you are locking the whole file instead of the relevant read/write conflict.
+You want to be able to read several files concurrently and if you lock the whole file you are removing that feature.
+
+2. The readers/writers problem is when multiple threads tries to access the same shared resource at the same time, at least one reading and at least one writing to it.
+You can have indefintly readers reading if no one is writing but at most one writer at the same time.
+There is three algorithms: first readers-writers, second readers-writers, third readers-writers. The one who sets the reader to the highest prio is first readers-writers and the pseudocode is something like:
+There can be how many readers as possible but when no one is reading the writing is okay but if there is at least 1 reader you lock the thread.
+
+3. One example if is a thread is reading a file when its size. It does some kind of calculation of a file, when it is done and it returns the answer it comes back to the file being modified. This will ruin the file.
+Another example is if a shared resources determine if the file should be closed or not. One returns yes and another returns no this will become a race condition where the first one to return determine the outcome.
+
+4. The inode is an int which identifies which file is being handled assuming it is not active. File object however is used when pintos has the file opened.
+In short terms inode is used to identify the file and the file object is used by pintos to represent the file.
+
+5. The answer will be BBB since process A will override the AAA because process C hasn't saved and they are accessing the shared resource at the same time.
+
+control questions.
+
+1. file_open opens with an inode but filesys_open opens with a string instead.
+
+2. filesys_remove calls directory.c for the function dir_open_root which uses inode_open and also calls the function which uses inode_open and inode_write_at, inode_remove and inode_close. dir_close uses inode_close
+filesys_open calls directory.c for the function dir_open_root which uses inode_open and also calls the function which uses inode_open and inode_write_at, inode_remove and inode_close. it also uses dir_lookup which uses inode_open. dir_close uses inode_close
+file_close uses inode_close.
+file_read uses inode_read_at.
+file_write inode_write_at.
+
+3. It removes first the name then removes the file. filesys_remove uses dir_remove to remove the file content.
+
+4. The file will not be removed when it is opened because there is file descriptors left which makes it impossible to remove the file.
+
+5. in the struct file, there is a position variable, if we want to update the pos we can use file_seek.
+
+6. No you can not but however if you have the file open and call remove, the file gets removed but you can still read and write to it since the fd is still active.
+
+7. free_map_allocate is used in inode_create and free_map_release is used in inode_close
+
+8. We think that the syscall level is the most appropriate level to implement on. On this level we can apply the solution to any file, it is also the easiest way to implement it.
+
+9. Considering that the bitmap and cache can also cause race conditions we may need to do it on file system or inode level. The best would probably be using pure inode hence we can guarantee that it will always be safe for concurrency.
+

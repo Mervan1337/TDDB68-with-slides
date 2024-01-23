@@ -1,0 +1,14 @@
+1) We should avoid it because it uses much CPU power, 
+leading to decreased performance and should only be used in short lived spin-locks. 
+Busy waiting, also called spin-locking, is when you check a condition waiting for the condition to change. 
+This is to prevent 2 threads to write in a critical section at the same time. 
+
+2) Yield returns a generator function that you can temporary pause a function 
+and make other functions to call next. Thus executing the rest of the code. 
+Sleep will wait a specific time and then continue the program.
+
+3) Locks can only be in 2 states, locked or unlocked. 
+Semaphores can count mechanisms, meaning that it could be more than 1 representing available resources. 
+Locks provide mutual exclusive (ME) access to resources, semaphores also provides ME. 
+But can control access to multiple resources, instead of 1. 
+Deadlock is when a group of processes wait for eachother in a circular wait, but no processes can leave the lock. 

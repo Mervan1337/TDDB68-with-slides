@@ -1,0 +1,20 @@
+	userprog/syscall.[h|c] :
+Handles incoming syscalls. I think later we will try to have different cases for different syscalls.
+
+	threads/interrupt.[h|c] :
+Handles all form of interrupts, both internal and external interupts. 
+The file give options to dump the interupt frame to the console. 
+
+	lib/syscall-nr.h :
+Contains all system call numbers. 
+
+	src/lib/user/syscall.[h|c] :
+Basically a big "switch case" handling syscalls and give the right function to the right syscall.
+	
+	filesys/filesys.[h|c] :
+Contains a basic filesystem interface, you can create, remove, open and format files.
+
+	filesys/file.[h|c] :
+Contains functions for open files, create files. 
+Uses inode (index node) containing file's owner, permissions, timestamps and location in the storage. 
+Unique inode-number for every file.

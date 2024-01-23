@@ -1,0 +1,4 @@
+1. Argc is a counter that keeps track of how many arguments that get passed when executing a file
+Argv is a vector containing pointers to the characters of the arguments passed.
+
+2. It is stored in the stack in some way depending on the os.
